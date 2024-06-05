@@ -3,7 +3,7 @@ const productSchema=new Schema({
     name:{
         type:String,
         required:true,
-        minLength:[4,"product name should have atleast {VALUE} characters"]
+        minLength:[4,"product name should have atleast 4 characters"]
     },
     price:{
         type:Number,

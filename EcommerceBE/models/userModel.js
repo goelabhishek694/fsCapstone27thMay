@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true,"name cannot be empty"]
   },
   email: {
     type: String,
@@ -11,15 +11,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minLength: 8,
+    minLength: [8,"password should contain atleast 8 characters"]
   },
   confirmPassword: {
     type: String,
     required: true,
     minLength: 8,
-    validate: function () {
+    validate: [function () {
       return this.password == this.confirmPassword;
-    },
+    },"{VALUE} did not match password"]
   },
   // createdAt:{
   //   type:Date,
@@ -30,7 +30,6 @@ const userSchema = new mongoose.Schema({
     default:"admin"
   }
 },{ timestamps: true });
-
 
 userSchema.pre("save",function(next){
   console.log("prehook is called");
@@ -47,8 +46,10 @@ userSchema.pre("save",function(next){
   next();
 })
 
-userSchema.pre("findOneAndDelete",(next)=>{
-  console.log("i was called before deleting a user");
+userSchema.pre("findOne",function(next){
+  console.log("user by id hook");
+  console.log(this);
+  this.select("-password");
   next()
 })
 
