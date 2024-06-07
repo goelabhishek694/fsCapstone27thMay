@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique:true,
   },
   password: {
     type: String,
@@ -51,6 +52,15 @@ userSchema.pre("findOne",function(next){
   console.log(this);
   this.select("-password");
   next()
+})
+//can be used to handle errors related to unique :true 
+userSchema.post("save",function(error,doc,next){
+  console.log("post hook is called");
+  if(error.code==11000) {
+    next(new Error("email is already registered"))
+  };
+  console.log("document",doc);
+  next();
 })
 
 const UserModel = mongoose.model("UserModel", userSchema);

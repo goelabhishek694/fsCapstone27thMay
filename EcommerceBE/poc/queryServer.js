@@ -24,22 +24,28 @@ app.get("/api/user/:id",function(req,res){
 app.get("/api/product",async(req,res)=>{
     //sort paginate limit 
     const {query:{sort,page,limit}} = req;
-    let [prop,order]=sort.split("_");
-    // price:1 -> asc 
-    // price : -1 -> desc 
-    order = order == "desc" ? -1 : 1;
-    //page no 
-    // let page=query.page;
-    //limit
-    // let limit=query.limit;
-    console.log(prop,order,limit,page);
-    let ppp=2;
-    let productToSkip=ppp*(page-1)
-    let query=ProductModel.find().sort({[prop]:order}).skip(productToSkip).limit(ppp);
-    let data=await query;
+    let products=ProductModel.find();
+    if(sort){
+        let [prop,order]=sort.split("_");
+        // price:1 -> asc 
+        // price : -1 -> desc 
+        order = order == "desc" ? -1 : 1;
+        //page no 
+        // let page=query.page;
+        //limit
+        // let limit=query.limit;
+        console.log(prop,order,limit,page);
+        products=products.sort({[prop]:order});
+    }
+    if(limit && page){
+        let productToSkip=limit*(page-1);
+        products=products.skip(productToSkip).limit(limit);
+    }
+    let data=await products;
+    if(data.length==0){
+        res.status(400).json({msg:"data not found"});
+    }
     res.status(200).json(data);
-
-
 
 })
 

@@ -1,6 +1,6 @@
 const {Schema,model} = require("mongoose");
 const productSchema=new Schema({
-    name:{
+    title:{
         type:String,
         required:true,
         minLength:[4,"product name should have atleast 4 characters"]
@@ -23,6 +23,10 @@ const productSchema=new Schema({
         type:String,
         default:"Miscellaneous",
         required:true
+    },
+    image:{
+        type:String,
+        default:"https://picsum.photos/200/300"
     }
 },{timestamp:true});
 

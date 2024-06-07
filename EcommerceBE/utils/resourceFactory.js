@@ -1,5 +1,3 @@
-const { ratingClasses } = require("@mui/material");
-
 const createResource=function(modelName){
     console.log(modelName, " method created");
     return async (req,res)=>{
