@@ -7,7 +7,7 @@ import ProductList from '../components/ProductList';
 import basicOps from '../utility/basicOps';
 import { usePaginationContext } from '../contexts/PaginationContext';
 import axios from 'axios';
-import URL_CONSTANTS from '../Constants/urlConstants';
+import URL_CONSTANTS from "../Constants/urlConstants";
 function Home() {
     // preserver -> pagination
     /***single source of truth for all the products***/
@@ -31,16 +31,14 @@ function Home() {
             /***
              * route -> the whole url
              * **/
-            const response = await axios.get(URL_CONSTANTS.PRODUCT_LIST);
-            const productList = response.data.message;
-            const mappedProductList = productList.map((product) => {
-                return {
-                    id: product["_id"], ...product
-                }
+            console.log(URL_CONSTANTS);
+            let response=await axios.get(URL_CONSTANTS.PRODUCT_LIST);
+            const productlist=response.data.data;
+            const mappedList=productlist.map((product) => {
+                return {id:product["_id"], ...product}
             })
-            console.log(mappedProductList);
-            setProducts(mappedProductList);
-
+            console.log(mappedList);
+            setProducts(mappedList);
         })()
     }, [])
     const object = basicOps(products, searchTerm, sortDir, pageNum, pageSize);

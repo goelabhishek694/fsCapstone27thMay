@@ -13,7 +13,7 @@ function ProductList(props) {
                         <div className="product_meta">
                             <p className="product_title">{product.title}</p>
                             <p className='Price'>$ {product.price}</p>
-                            <p className='category'>$ {product.category}</p>
+                            <p className='category'> {product.category}</p>
                         </div>
                        <Link
                        to={`/product/${product.id}`}
