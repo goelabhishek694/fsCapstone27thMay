@@ -31,7 +31,6 @@ function Home() {
             /***
              * route -> the whole url
              * **/
-            console.log(URL_CONSTANTS);
             let response=await axios.get(URL_CONSTANTS.PRODUCT_LIST);
             const productlist=response.data.data;
             const mappedList=productlist.map((product) => {
