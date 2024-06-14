@@ -50,7 +50,7 @@ userSchema.pre("save",function(next){
 userSchema.pre("findOne",function(next){
   console.log("user by id hook");
   console.log(this);
-  this.select("-password");
+  // this.select("-password");
   next()
 })
 //can be used to handle errors related to unique :true 
