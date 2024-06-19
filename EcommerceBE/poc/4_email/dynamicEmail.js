@@ -51,6 +51,6 @@ async function emailSender(template, receiverEmail, emailObject) {
   }
 }
 
-emailSender("signup.html", "goelabhishek694@gmail.com, raushan@clubman.in", { name: "Abhishek" }).then(()=>console.log("email sent"));
+// emailSender("signup.html", "goelabhishek694@gmail.com, raushan@clubman.in", { name: "Abhishek" }).then(()=>console.log("email sent"));
 
 module.exports=emailSender;

@@ -8,7 +8,7 @@ const path = require("path");
 const emailSender = require("../4_email/dynamicEmail");
 // including env variables
 dotenv.config({ path: path.join("../", "../", ".env") });
-const { PORT, MONGODBPASSWORD, USERID, JWT_SECRET } = process.env;
+const { PORT, MONGODBPASSWORD, USERID, JWT_SECRET, HOST_NAME} = process.env;
 console.log(USERID);
 const promisifiedJWTSign = promisify(jwt.sign);
 const promisifiedJWTVerify = promisify(jwt.verify);
@@ -202,11 +202,11 @@ const forgetPasswordController = async function (req, res) {
     user.otp = otp;
     user.otpExpiry = Date.now() + 10 * 60 * 1000;
     await user.save();
-
+    //sendMail with resetUrl, otp
     res.status(200).json({
       status: "success",
       message: "otp sent to your email",
-      resetUrl: `http://localhost:3000/resetPassword${user["_id"]}`,otp,
+      resetUrl: `http://${HOST_NAME}/resetpassword/${user["_id"]}`,otp,
     });
   } catch (err) {
     res.status(500).json({
@@ -282,6 +282,9 @@ app.patch("/forgetpassword", forgetPasswordController);
 app.patch("/resetpassword/:id", resetPasswordController);
 //show profile data
 app.get("/allowIfLoggedIn", protectRouteMiddleWare, getUserData);
+app.use()
+app.get("/allowIfAdmin", protectRouteMiddleWare, checkifAdmin, getAllUser);
+app.get("/allowIfAdmin", protectRouteMiddleWare, checkifAdmin, getAllUser);
 app.get("/allowIfAdmin", protectRouteMiddleWare, checkifAdmin, getAllUser);
 
 /******************handler functions ***************/
