@@ -27,6 +27,15 @@ const productSchema=new Schema({
     image:{
         type:String,
         default:"https://picsum.photos/200/300"
+    },
+    reviews:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:"ReviewModel"
+    },
+    averageRating:{
+        type:Number,
+        min:[1,"rating cannot be less than 1"],
+        max:[5,"rating cannot be more than 5"]
     }
 },{timestamp:true});
 

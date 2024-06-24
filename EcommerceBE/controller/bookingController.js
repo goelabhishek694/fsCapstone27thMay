@@ -65,6 +65,7 @@ async function initialBooking(req,res){
 
 async function getAllBookings(req,res){
     try {
+        //this should only be access by admin . 
         //send all the bookings/orders received 
         // const bookings=await BookingModel.find().populate("user");
         const bookings=await BookingModel.find().populate({path:"user", select: "name email"}).populate({path:"product", select:"price discount category"});
