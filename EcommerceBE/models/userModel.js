@@ -29,7 +29,12 @@ const userSchema = new mongoose.Schema({
   role: {
     type:String,
     default:"admin"
+  },
+  bookings:{
+    type:[mongoose.Schema.Types.ObjectId],
+    ref:"BookingModel"
   }
+
 },{ timestamps: true });
 
 userSchema.pre("save",function(next){

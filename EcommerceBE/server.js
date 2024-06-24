@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const {userRouter}=require("./routes/userRouter");
 const {productRouter} = require("./routes/productRouter");
+const {bookingRouter} = require("./routes/bookingRouter");
 const { USERID, MONGODBPASSWORD,PORT } = process.env;
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(cors(corsConfig));
 
 app.use("/api/user", userRouter);
 app.use("/api/v1/product", productRouter);
+app.use("/api/v1/booking", bookingRouter);
 
 app.listen(PORT, function (req, res) {
   console.log(`app is listening on port ${PORT}`);
