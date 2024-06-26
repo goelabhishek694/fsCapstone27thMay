@@ -7,3 +7,6 @@ https://github.com/goelabhishek694/Feb7IntermediateFE/tree/Lecture40/React/2_Rea
 
 14/06/2024
 https://www.npmjs.com/package/imapflow
+
+26/06/2024
+https://codahale.com/how-to-safely-store-a-password/
