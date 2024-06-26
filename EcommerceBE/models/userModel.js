@@ -42,7 +42,7 @@ userSchema.pre("save",function(next){
   this.confirmPassword = undefined;
   next();
 })
-const roles=["admin","buyer","seller"];
+const roles=["admin","buyer","seller","user"];
 userSchema.pre("save",function(next){
   let isPresent=roles.find(role=>role==this.role);
   if(!isPresent){

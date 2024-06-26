@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const promisify = require("util").promisify;
 const path = require("path");
 const emailSender = require("../4_email/dynamicEmail");
+const rateLimit=require("express-rate-limit");
 // including env variables
 dotenv.config({ path: path.join("../", "../", ".env") });
 const { PORT, MONGODBPASSWORD, USERID, JWT_SECRET, HOST_NAME} = process.env;
@@ -274,14 +275,21 @@ const resetPasswordController=async function(req,res){
           });
     }
 }
-
+const limiter=rateLimit({
+  windowMs: 15*60*1000,
+  limit:100,
+  keyGenerator:function(req,res){
+    return req.userId;
+  }
+})
 /************routes***************/
 app.post("/signup", signupController);
 app.post("/login", loginController);
 app.patch("/forgetpassword", forgetPasswordController);
 app.patch("/resetpassword/:id", resetPasswordController);
 //show profile data
-app.get("/allowIfLoggedIn", protectRouteMiddleWare, getUserData);
+//if i wan toa ttach rate linmiting to ths api , then i am ging to attach on the baiss of req.userId and not ip address 
+app.get("/allowIfLoggedIn", protectRouteMiddleWare,limiter, getUserData);
 app.use()
 app.get("/allowIfAdmin", protectRouteMiddleWare, checkifAdmin, getAllUser);
 app.get("/allowIfAdmin", protectRouteMiddleWare, checkifAdmin, getAllUser);

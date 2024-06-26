@@ -5,12 +5,14 @@ const path = require("path");
 const cors = require('cors');
 const crypto=require("crypto");
 const ShortUniqueId = require('short-unique-id');
+const helmet=require("helmet");
 const uid = new ShortUniqueId({ length: 10 });
 dotenv.config({ path: path.join("../", "../", ".env") });
 const { RAZORPAY_PUBLIC_KEY, RAZORPAY_PRIVATE_KEY, WEBHOOK_SECRET } = process.env;
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
 var razorpayInstance = new RazorPay({
   key_id: RAZORPAY_PUBLIC_KEY,
   key_secret: RAZORPAY_PRIVATE_KEY,
