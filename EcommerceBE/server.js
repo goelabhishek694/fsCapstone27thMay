@@ -6,6 +6,7 @@ const {userRouter}=require("./routes/userRouter");
 const {productRouter} = require("./routes/productRouter");
 const {bookingRouter} = require("./routes/bookingRouter");
 const {reviewRouter} = require("./routes/reviewRouter");
+const {authRouter} = require("./routes/authRouter");
 const { USERID, MONGODBPASSWORD,PORT } = process.env;
 const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
@@ -33,9 +34,12 @@ const limiter=rateLimit({
 })
 app.use("/api/user", userRouter);
 app.use("/api/v1/product", productRouter);
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/review", reviewRouter);
 
 app.listen(PORT, function (req, res) {
   console.log(`app is listening on port ${PORT}`);
 });
+
+
