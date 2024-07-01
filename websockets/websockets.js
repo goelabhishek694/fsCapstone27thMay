@@ -13,12 +13,16 @@ const io=new Server(server);
 
 io.on("connection",(socket)=>{
     console.log("a user connected ", socket.id);
-    setInterval(()=>{
-        socket.emit("message","message from server"+"-"+socket.id+"at "+new Date());
-    },2000);
+    // setInterval(()=>{
+    //     socket.emit("message","message from server"+"-"+socket.id+"at "+new Date());
+    // },2000);
 
     socket.on("disconnect",()=>{
         console.log("user disconnected "+socket.id);
+    })
+
+    socket.on("message",(data)=>{
+        socket.broadcast.emit("broadcast",data);
     })
 });
 

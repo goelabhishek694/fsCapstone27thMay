@@ -4,17 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Websocket</title>
+    <style>
+        ul{
+               list-style: none;
+             }
+        
+        
+             .sender {
+               background-color: lightcoral;
+               margin-left: 4rem;
+            padding:1rem;
+        
+        
+             }
+             .receiver {
+               background-color: lightblue;
+               margin-left: 2rem;
+            padding:1rem;
+        
+        
+             }
+             .messages {
+               width: 50%;
+               /* margin: 0 auto; */
+             }
+           </style>
+         </head>
+        
 </head>
 <body>
     <h1>Websocket</h1>
+   <input type="text" id="message" />
+   <button id="send">Send</button>
+
+   <h2>Messages</h2>
+   <div class="messages">
+     <ul id="list"></ul>
+   </div>
+
     <!-- after attaching http server object to socket io instance, it sets up a special route to serve its client-side library .  -->
     <script src="/socket.io/socket.io.js"></script>
-   <script>
-     const socket = io();
-     socket.on("message",(data)=>{
-        console.log("receiving message",data);
-     })
-   </script>
+   <script src="./script.js"></script>
 
 </body>
 </html>
