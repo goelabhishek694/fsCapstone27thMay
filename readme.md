@@ -18,4 +18,9 @@ https://portswigger.net/web-security/nosql-injection#:~:text=NoSQL%20operator%20
 01/07/2024
 https://shreya2699.github.io/broadeninghorizons-by-shreya/tech1.html
 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Connection_management_in_HTTP_1.x
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Connection_management_in_HTTP_1.x\
+
+
+cluster mnodule 
+worker threads 
+child_process
