@@ -15,7 +15,7 @@
 // 4. close the connection
 
 const ProductModel=require("../models/productModel");
-const productList=require("../json/products");
+const productList=require("../app/json/products");
 function seedProductData(model,entries){
     const mongoose=require("mongoose");
     const dotenv=require("dotenv");
