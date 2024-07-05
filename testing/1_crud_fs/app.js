@@ -27,10 +27,10 @@ function handleUserData(req,res){
             message:msg
         })
     }catch(err){
-        console.error("Error reading user data:", error);
+        console.log("Error reading user data:", err);
         return res.status(500).json({
             status: "error",
-            message: "err",
+            message: err.message,
         });
     }
 }

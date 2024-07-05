@@ -31,14 +31,14 @@ describe("get all user data", () => {
 
   it("should handle file error", async () => {
     fs.readFileSync.mockImplementationOnce(() => {
-      throw new Error("file not found");
+    throw new Error("file not found");
     });
     const response = await request(app).get("/api/user");
     console.log(response.status);
     console.log(response.body);
-    // expect(response.status).toBe(500);
-    // expect(response.body.status).toBe("error");
-    // expect(response.body.message).toBe("Error: file not found");
+    expect(response.status).toBe(500);
+    expect(response.body.status).toBe("error");
+    expect(response.body.message).toBe("Error: file not found");
   });
 });
 
