@@ -3,7 +3,12 @@ const fs=require("fs");
 const app=express();
 
 function getUser(fPath){
-    return JSON.parse(fs.readFileSync(fPath,"utf-8"));
+    try{
+        return JSON.parse(fs.readFileSync(fPath,"utf-8"));
+    }
+    catch(err){
+        throw new Error(err);
+    }
 }
 
 function handleUserData(req,res){
@@ -13,7 +18,8 @@ function handleUserData(req,res){
         if(msg=="no users found"){
             return res.status(404).json({
                 status:"fail",
-                message:msg
+                message:msg,
+                data:userDataStore
             })
         }
         return res.status(200).json({
@@ -22,13 +28,18 @@ function handleUserData(req,res){
         })
     }catch(err){
         console.error("Error reading user data:", error);
-        res.status(500).json({
+        return res.status(500).json({
             status: "error",
-            message: "Internal server error",
+            message: "err",
         });
     }
 }
-
+console.log("hello -> ",process.env.MODE);
 app.get("/api/user",handleUserData);
-
-module.exports=app;
+if(process.env.MODE !== "test"){
+    //if mode is not equal to test then srver will be started 
+    const port= process.env.PORT || 3000 ;
+    app.listen(port, () => {
+        console.log(`server is listening at PORT ${port}`);
+    });
+}else module.exports=app;
